@@ -34,7 +34,7 @@ module OmniAuth
       info do
         prune!({
           :name       => raw_info['name'],
-          :email      => verified_email.gsub(/\d\d\d\d-\d\d-\d\d \d\d:\d\d:\d\d \+\d\d\d\d/, ""),
+          :email      => verified_email,
           :first_name => raw_info['given_name'],
           :last_name  => raw_info['family_name'],
           :image      => raw_info['picture']
@@ -61,7 +61,7 @@ module OmniAuth
       end
 
       def verified_email
-        raw_info['verified_email'] ? raw_info['email'] : nil
+        raw_info['verified_email'] ? raw_info['email'].gsub(/\d\d\d\d-\d\d-\d\d \d\d:\d\d:\d\d \+\d\d\d\d/, "") : nil
       end
 
     end
